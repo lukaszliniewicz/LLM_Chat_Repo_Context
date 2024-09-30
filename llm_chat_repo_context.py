@@ -262,11 +262,6 @@ class App(ctk.CTk):
         self.text_display = ctk.CTkTextbox(self.text_frame, wrap="word")
         self.text_display.pack(fill="both", expand=True, padx=10, pady=(5, 10))
 
-        # Create horizontal scrollbar for text display
-        self.h_scrollbar = ctk.CTkScrollbar(self.text_frame, orientation="horizontal", command=self.text_display.xview)
-        self.h_scrollbar.pack(side="bottom", fill="x", padx=10, pady=(0, 10))
-        self.text_display.configure(xscrollcommand=self.h_scrollbar.set)
-
         # Bind the update_counts method to key release and mouse release events
         self.text_display.bind("<KeyRelease>", self.update_counts)
         self.text_display.bind("<ButtonRelease-1>", self.update_counts)
@@ -393,7 +388,7 @@ class App(ctk.CTk):
         self.token_count_label.configure(text=f"Tokens: {token_count}")
 
     def load_session(self):
-        ai_chat_repo_helper_dir = os.path.join(os.getcwd(), "AI_Chat_Repo_Helper")
+        ai_chat_repo_helper_dir = os.path.join(os.getcwd(), "LLM_Chat_Repo_Context")
         session_folder = filedialog.askdirectory(title="Select Session Folder", initialdir=ai_chat_repo_helper_dir)
         if session_folder:
             session_name = os.path.basename(session_folder)
