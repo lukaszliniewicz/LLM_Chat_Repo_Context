@@ -1,6 +1,8 @@
 # LLM Chat Repo Context
 
-A simple tool to assist with providing context about code repositories (directory structure and all/selected concatenated non-binary files) to Large Language Models in chat interfaces when no github integrations are available. Processing a lot of code through the API, especially for big proprietary models like Claude Sonnet or Opus (which are the most capable), can get very expensive very fast. The chat interface is much cheaper if one does it a lot, an integration with Github is not always possible and the models can't execute any code or browse the internet (at least Claude can't). 
+A simple GUI and command line tool to assist with providing chat LLMs with context about code repositories (directory structure and all/selected non-binary files, concatenated and saved as a text file) when no github integrations are available. Processing a lot of code through the API, especially for big proprietary models like Claude Sonnet or Opus (which are the most capable), can get very expensive very fast. The chat interface is much cheaper if one does it a lot. An integration with Github is not always possible and the models can't execute any code or browse the internet (at least Claude can't), which is when this may come in handy. 
+
+You can view a sample output from the [Pandrator](https://github.com/lukaszliniewicz/Pandrator) repository [here](https://github.com/lukaszliniewicz/LLM_Chat_Repo_Context/blob/main/example_pandrator.txt).
 
 >[!Note]
 >- This tool does not provide direct integration with LLMs
