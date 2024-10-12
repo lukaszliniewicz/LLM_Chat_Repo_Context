@@ -22,12 +22,17 @@ You can view a sample output from the [Pandrator](https://github.com/lukaszlinie
 
 ## How to Use
 
-1. Download the .exe file (created using PyInstaller)
-2. Run the application
-3. Enter a Git repository URL
-4. Choose your analysis options
-5. Click "Analyze Repository"
-6. Use the output in your LLM chat conversations
+1. Download and run the .exe file (created using PyInstaller) or, if you're not comfortable doing that or are not running Windows, make sure that GIT and Python are installed on your system and accessible. Then:
+```
+git clone https://github.com/lukaszliniewicz/LLM_Chat_Repo_Context
+cd LLM_Chat_Repo_Context
+pip install -r requirements.txt
+python llm_chat_repo_context.py
+```
+2. Enter a Git repository URL
+3. Choose your analysis options
+4. Click "Analyze Repository"
+5. Use the output in your LLM chat conversations
 
 ## Use Cases and Examples
 
