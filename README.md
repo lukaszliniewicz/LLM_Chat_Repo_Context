@@ -22,7 +22,7 @@ You can view a sample output from the [Pandrator](https://github.com/lukaszlinie
 
 ## How to Use
 
-1. Download and run the .exe file (created using PyInstaller) or, if you're not comfortable doing that or are not running Windows, make sure that GIT and Python are installed on your system and accessible. Then:
+1. Download and run the .exe file (created using PyInstaller) or, if you're not comfortable doing that or are not running Windows, make sure that GIT and Python are installed on your system and accessible. If in doubt, copy this readme and ask Claude, ChatGPT or Gemini for assistance. Then:
 ```
 git clone https://github.com/lukaszliniewicz/LLM_Chat_Repo_Context
 cd LLM_Chat_Repo_Context
