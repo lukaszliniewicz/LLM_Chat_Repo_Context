@@ -59,6 +59,16 @@ def get_structure(path, only_dirs=False, exclude=None, include=None, ignore_git=
                 structure.append(f'{subindent}{f}')
     return '\n'.join(structure)
 
+def convert_notebook_to_markdown(file_path):
+    """Convert Jupyter notebook to markdown using jupytext."""
+    try:
+        import jupytext
+        notebook = jupytext.read(file_path)
+        return jupytext.writes(notebook, fmt='md')
+    except Exception as e:
+        logging.error(f"Error converting notebook {file_path}: {str(e)}")
+        return None
+
 def concatenate_files(path, exclude=None, include=None, ignore_git=True, exclude_license=True, exclude_readme=False):
     content = []
     file_positions = {}
@@ -80,25 +90,34 @@ def concatenate_files(path, exclude=None, include=None, ignore_git=True, exclude
             if should_exclude(file, ignore_git, exclude_license, exclude_readme):
                 continue
             file_path = os.path.join(root, file)
-            if is_binary(file_path):
-                continue
-            if exclude and any(file.endswith(ext) for ext in exclude):
-                continue
-            if include and not any(file.endswith(ext) for ext in include):
-                continue
+            
+            # Handle different file types
+            if file.endswith('.ipynb'):
+                md_content = convert_notebook_to_markdown(file_path)
+                if md_content is None:
+                    continue
+                file_content = md_content
+            else:
+                if is_binary(file_path):
+                    continue
+                if exclude and any(file.endswith(ext) for ext in exclude):
+                    continue
+                if include and not any(file.endswith(ext) for ext in include):
+                    continue
+                
+                try:
+                    with open(file_path, 'r', encoding='utf-8') as f:
+                        file_content = f.read()
+                except Exception as e:
+                    logging.error(f"Error reading file {file_path}: {str(e)}")
+                    continue
             
             file_header = f"\n--{file}--\n"
             content.append(file_header)
             file_positions[os.path.join(rel_path, file)] = current_position
             current_position += len(file_header)
-            
-            try:
-                with open(file_path, 'r', encoding='utf-8') as f:
-                    file_content = f.read()
-                    content.append(file_content)
-                    current_position += len(file_content)
-            except Exception as e:
-                logging.error(f"Error reading file {file_path}: {str(e)}")
+            content.append(file_content)
+            current_position += len(file_content)
     
     return '\n'.join(content), file_positions
 
