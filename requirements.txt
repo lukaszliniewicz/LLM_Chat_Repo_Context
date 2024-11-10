@@ -1,3 +1,4 @@
 dulwich
 customtkinter
 tiktoken
+jupytext
